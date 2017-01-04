@@ -21,5 +21,10 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+<!-- 	<dependency>
+	    <groupId>com.google.maps</groupId>
+	    <artifactId>google-maps-services</artifactId>
+	    <version>0.1.17</version>
+	</dependency> -->
   </dependencies>
 </project>
