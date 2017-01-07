@@ -1,6 +1,6 @@
-var wsUri = "ws://10.1.2.168:50001";
+//var wsUri = "ws://10.1.2.168:50001";
 var websocket;
-function testWebSocket() {
+function testWebSocket(wsUri) {
 	websocket = new WebSocket(wsUri);
 	websocket.onopen = function(evt) {
 		onOpen(evt);

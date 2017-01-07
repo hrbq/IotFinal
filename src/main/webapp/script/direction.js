@@ -56,6 +56,10 @@ function initMap() {
 	// == ==
 	var org = new google.maps.LatLng(25.042651, 121.524593); // 成功中學
 	var des = new google.maps.LatLng(25.041253, 121.520035); // 台大醫院
+	
+	 google.maps.event.addListener(map, 'click', function(event) {
+		    console.log("{lat:"+event.latLng.lat()+", lng:"+event.latLng.lng()+"},");
+	 });
 
 	document.getElementById('submit').addEventListener('click', function() {
 		level = document.getElementById('level').value;
@@ -65,7 +69,7 @@ function initMap() {
 			async.waterfall([
 					function(callback) {
 						if (redirection) {
-							console.log("==1");
+							//console.log("==1");
 							calculateAndDisplayRoute(directionsService,
 									directionsDisplay, org, des, function(
 											routePolylineParam) {
@@ -74,19 +78,19 @@ function initMap() {
 										}
 										routePolyline = routePolylineParam;
 										redirection = false;
-										console.log("==1-1");
+										//console.log("==1-1");
 									});
 						}
 						callback(null, routePolyline);
 					},
 					function(routePolylineParam, callback) {
-						console.log("==2");
-						console.log("==routePolyline" + routePolylineParam);
+						//console.log("==2");
+						//console.log("==routePolyline" + routePolylineParam);
 						// ==check change route==
 						if (routePolyline != null
 								&& !google.maps.geometry.poly.isLocationOnEdge(pos,
 										routePolylineParam, 10e-4)) {
-							console.log("==2-1");
+							//console.log("==2-1");
 							org = pos;
 							redirection = true;
 						}
@@ -179,9 +183,10 @@ function showDrivingRoute(callback) {
 			var pos = new google.maps.LatLng(lat, lng);
 			count++;
 			// ==send socket to wuclass==
-			 testWebSocket();
-			 doSocketSend(convertToJson(direction, pos, pid, level));
-			 doSocketClose();
+			var wsUri = "ws://10.1.2.168:50001";
+//			 testWebSocket(wsUri);
+//			 doSocketSend(convertToJson(direction, pos, pid, level));
+//			 doSocketClose();
 
 			//==send msg by TCP==
 //			createTCP();

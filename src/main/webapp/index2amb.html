@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+      #floating-panel {
+		  position: absolute;
+		  top: 10px;
+		  left: 25%;
+		  z-index: 5;
+		  background-color: #fff;
+		  padding: 5px;
+		  border: 1px solid #999;
+		  text-align: center;
+		  font-family: 'Roboto','sans-serif';
+		  line-height: 30px;
+		  padding-left: 10px;
+		}
+    </style>
+  </head>
+  <body>
+  	<div id="floating-panel">
+    	<b style="color:red">傷重等級-1: </b>
+	    <select id="level1">
+	      <option value="1">1-復甦急救</option>
+	      <option value="2">2-危急</option>
+	      <option value="3">3-緊急</option>
+	      <option value="4">4-次緊急</option>
+	      <option value="5">5-非緊急</option>
+	    </select>
+    	<b style="color:blue">傷重等級-2: </b>
+	    <select id="level2">
+	      <option value="1">1-復甦急救</option>
+	      <option value="2">2-危急</option>
+	      <option value="3">3-緊急</option>
+	      <option value="4">4-次緊急</option>
+	      <option value="5">5-非緊急</option>
+	    </select>
+	    <b>目的地: </b>
+	    <select id="destination">
+	    	<option value="25.042651, 121.524593">台大醫院</option>
+	    </select>
+    	<input id="submit" type="button" value="設定">
+    </div>
+    <div id="map"></div>
+<!--     <script src="script/test.js"></script> -->
+    <script src="script/route1.js"></script>
+    <script src="script/route2.js"></script>
+    <script src="script/routeCar2.js"></script>
+    <script type="text/javascript" src="api/async.js"></script>
+	<script src="script/socket.js"></script>
+    <script src="script/direction2.js"></script>
+   
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry&key=AIzaSyA7cZu6mf3s3dwSNvomUntXVZCiy2fNTjI&callback=initMap"
+        async defer></script>
+  </body>
+</html>
