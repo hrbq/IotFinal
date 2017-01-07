@@ -1,9 +1,18 @@
 var map;
+var direction1 = ["0","4","9"];
+var direction2 = ["0","13","8"];
 var route = route1; // choose route here
+var direction = direction1; //choose direction here
+var pid = "1"; //change pid here
+var level;
+
 var markers = [];
-var latlng = function(lat, lng) {
-	this.lat = lat;
-	this.lng = lng;
+var message =function(rpl, lat, lng, pid, lvl) {
+		this.rpl = rpl;
+		this.lat = lat;
+		this.lng = lng;
+		this.pid = pid;
+		this.lvl = lvl;
 };
 var trafficLight = function(id, lat1, lng1, lat2, lng2) {
 	this.id = id;
@@ -12,6 +21,8 @@ var trafficLight = function(id, lat1, lng1, lat2, lng2) {
 	this.lat2 = lat2;
 	this.lng2 = lng2;
 }
+
+
 var trafficLightAll = [
 		new trafficLight(1, 25.042069423518775, 121.5244048833847,
 				25.04194305960817, 121.52436196804047),
@@ -47,6 +58,7 @@ function initMap() {
 	var des = new google.maps.LatLng(25.041253, 121.520035); // 台大醫院
 
 	document.getElementById('submit').addEventListener('click', function() {
+		level = document.getElementById('level').value;
 		var redirection = true;
 		var routePolyline;
 		showDrivingRoute(function(pos, isContinue) {
@@ -167,9 +179,9 @@ function showDrivingRoute(callback) {
 			var pos = new google.maps.LatLng(lat, lng);
 			count++;
 			// ==send socket to wuclass==
-//			 testWebSocket();
-//			 doSocketSend({"firstName":"John", "lastName":"Doe"});
-//			 doSocketClose();
+			 testWebSocket();
+			 doSocketSend(convertToJson(direction, pos, pid, level));
+			 doSocketClose();
 
 			//==send msg by TCP==
 //			createTCP();
@@ -184,6 +196,12 @@ function showDrivingRoute(callback) {
 			}
 
 		}, i * 1000);
+	}
+	
+	function convertToJson(routeArray, location, pid, level){
+		var msg = new message(routeArray, location.lat(), location.lng(), pid, level);
+		console.log(JSON.stringify(msg));
+		return JSON.stringify(msg);		
 	}
 
 }

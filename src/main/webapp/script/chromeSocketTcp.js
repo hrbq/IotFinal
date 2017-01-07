@@ -36,8 +36,4 @@ function str2ab(str) {
 	return buf;
 }
 
-//rpl = []
-//lat
-//lng
-//pid
-//lvl
+
